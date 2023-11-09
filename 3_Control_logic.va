@@ -1,0 +1,22 @@
+//////////////////////////////////////////////////////////////////////////
+// @Author: 
+// @Design: control logic module of LC-ASC
+// @E-mail: 
+//////////////////////////////////////////////////////////////////////////
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module control_logic(inc, dec, up, dn);
+
+input inc, dec;
+output up, dn;
+electrical inc, dec, up, dn;
+
+
+   analog begin
+      V(up) <+ V(inc);
+	  V(dn) <+ V(dec);
+   end
+
+endmodule

@@ -1,0 +1,32 @@
+//////////////////////////////////////////////////////////////////////////
+// @Author: 
+// @Design: Counter module for LC-ASC evaluation
+// @E-mail: 
+//////////////////////////////////////////////////////////////////////////
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module Counter (in, out);
+
+input in;
+output out;
+electrical in, out;
+parameter real vth_spike = 10m;	// to judge the occurrence of up/dn spikes
+real temp;	// to store counter value
+
+analog begin 
+
+	@(initial_step) begin
+		temp = 0;	// initialize temp value
+	end
+
+	@(cross(abs(V(in))-vth_spike, +1)) begin
+		temp = temp + 1;
+	end
+	
+	V(out) <+ temp;
+
+end
+
+endmodule
